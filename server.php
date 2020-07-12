@@ -84,7 +84,12 @@
     $resourceType = $_GET['resource_type'];
 
     if(!in_array($resourceType, $allowedResourceTypes)) {
+        // Notifica codigo de error
+        http_response_code( 400 );
+
+        // Finaliza la ejecución
         die;
+
     }
 
     // Defino los recursos
