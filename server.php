@@ -84,6 +84,12 @@
 
         break;
         case 'DELETE':
+            // Validamos que el recurso Exista
+            if((!empty($resourceId)) && (array_key_exists( $resourceId, $books ))) {
+                // Eliminamos el recurso desde el array
+                unset($books[ $resourceId ]);
+            }
+            echo json_encode( $books );
         break;
     }
 
