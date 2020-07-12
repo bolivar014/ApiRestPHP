@@ -57,6 +57,7 @@
             }
         break;
         case 'POST': 
+            // 
             $json = file_get_contents('php://input');
             
             // Ejecutamos los cambios en el POST
@@ -67,6 +68,20 @@
 
         break;
         case 'PUT':
+            // Modificar datos
+            // Validamos que el recurso buscado, exista
+            if((!empty($resourceId)) && (array_key_exists( $resourceId, $books ))) {
+                // tomamos la entrada cruda
+                $json = file_get_contents('php://input');   
+            
+                // Transformamos el JSON recibido, en el nuevo JSON
+                $books[ $resourceId ] = json_decode($json, true);
+
+                // Retornamos el array en Formato JSON
+                echo json_encode( $books );
+            
+            }
+
         break;
         case 'DELETE':
         break;
