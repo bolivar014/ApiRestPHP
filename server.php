@@ -43,15 +43,28 @@
     // Caso para determinar el tipo de Respuesta del metodo "GET - POST - PUTH - DELETE"
     switch(strtoupper($_SERVER['REQUEST_METHOD'])) {
         case 'GET': 
+            // Verificamos el ID a procesar
             if(empty($resourceId)) {
+                // Sino tiene ID, muestra todo
                 echo json_encode($books);
+                
             } else {
+                // En caso que el ID exista, muestra los datos de ese ID
                 if(array_key_exists( $resourceId, $books )) {
+                    // Imprimo los datos del array
                     echo json_encode( $books[$resourceId] );
                 }
             }
         break;
         case 'POST': 
+            $json = file_get_contents('php://input');
+            
+            // Ejecutamos los cambios en el POST
+            $books[] = json_decode($json, true );
+
+            // Contamos el ultimo ID procesado
+            echo array_keys($books)[ count( $books - 1 )];
+
         break;
         case 'PUT':
         break;
